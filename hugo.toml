@@ -1,0 +1,22 @@
+baseURL = "https://kyavivi.github.io/"
+languageCode = "en-au"
+title = "Kyavivi Cosplay Portfolio"
+theme = "gallery"
+defaultContentLanguage = "en"
+
+[taxonomies]
+  series = "series"
+  character = "characters"
+  skin = "skins"
+  photographer = "photographers"
+  collaborator = "collaborators"
+  location = "locations"
+  event = "events"
+  type = "types"
+
+[params]
+  defaultTheme = "dark"
+
+[params.socialIcons]
+  instagram = "https://www.instagram.com/kyavivi/"
+
