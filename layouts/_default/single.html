@@ -1,7 +1,9 @@
 {{ define "main" }}
   {{ partial "title.html" . }}
   {{ partial "gallery.html" . }}
+  {{ partial "gallery-info.html" . }}
   {{ partial "related.html" . }}
+
   {{ with .Content }}
     <section class="prose">
       {{ . }}

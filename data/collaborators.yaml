@@ -1,0 +1,7 @@
+test_collaborator1:
+  name: "Test collaborator1"
+  url: "https://example.com/"
+
+test_collaborator2:
+  name: "Test collaborator 2"
+  url: "https://example.com/"

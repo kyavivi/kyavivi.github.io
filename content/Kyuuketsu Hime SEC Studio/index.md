@@ -15,8 +15,14 @@ date_shot: 2025-11-19
 photographers:
   - "squareeyedcreative"
 
+collaborators:
+  - "test_collaborator1"
+
 locations:
   - "siren_studios"
+
+events:
+  - "none"
 
 types:
   - "Shoot"

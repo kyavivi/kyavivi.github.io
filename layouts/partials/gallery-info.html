@@ -1,0 +1,157 @@
+{{ $photographerData := index hugo.Data "photographers" }}
+{{ $locationData := index hugo.Data "locations" }}
+{{ $collaboratorData := index hugo.Data "collaborators" }}
+
+{{ $hasInfo := or
+  .Params.series
+  .Params.characters
+  .Params.skins
+  .Params.date_shot
+  .Params.photographers
+  .Params.collaborators
+  .Params.locations
+  .Params.types
+}}
+
+{{ if $hasInfo }}
+<section class="gallery-info">
+  <h2>Information</h2>
+
+  <dl>
+    {{ with .Params.characters }}
+      <div>
+        <dt>Character</dt>
+        <dd>
+          {{ range $i, $value := . }}
+            {{ if $i }} · {{ end }}
+            <a href="{{ printf "characters/%s/" (urlize $value) | relURL }}">
+              {{ $value }}
+            </a>
+          {{ end }}
+        </dd>
+      </div>
+    {{ end }}
+
+    {{ with .Params.skins }}
+      <div>
+        <dt>Skin</dt>
+        <dd>
+          {{ range $i, $value := . }}
+            {{ if $i }} · {{ end }}
+            <a href="{{ printf "skins/%s/" (urlize $value) | relURL }}">
+              {{ $value }}
+            </a>
+          {{ end }}
+        </dd>
+      </div>
+    {{ end }}
+
+    {{ with .Params.series }}
+      <div>
+        <dt>Series</dt>
+        <dd>
+          {{ range $i, $value := . }}
+            {{ if $i }} · {{ end }}
+            <a href="{{ printf "series/%s/" (urlize $value) | relURL }}">
+              {{ $value }}
+            </a>
+          {{ end }}
+        </dd>
+      </div>
+    {{ end }}
+
+    {{ with .Params.date_shot }}
+      <div>
+        <dt>Date shot</dt>
+        <dd>{{ time.Format "2 January 2006" . }}</dd>
+      </div>
+    {{ end }}
+
+    {{ with .Params.photographers }}
+      <div>
+        <dt>Photographer{{ if gt (len .) 1 }}s{{ end }}</dt>
+        <dd>
+          {{ range $i, $id := . }}
+            {{ if $i }} · {{ end }}
+            {{ $person := index $photographerData $id }}
+
+            {{ if $person }}
+              {{ with $person.url }}
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer">
+                  {{ $person.name }}
+                </a>
+              {{ else }}
+                {{ $person.name }}
+              {{ end }}
+            {{ else }}
+              {{ $id }}
+            {{ end }}
+          {{ end }}
+        </dd>
+      </div>
+    {{ end }}
+
+    {{ with .Params.collaborators }}
+      <div>
+        <dt>Collaborating cosplayer{{ if gt (len .) 1 }}s{{ end }}</dt>
+        <dd>
+          {{ range $i, $id := . }}
+            {{ if $i }} · {{ end }}
+            {{ $person := index $collaboratorData $id }}
+
+            {{ if $person }}
+              {{ with $person.url }}
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer">
+                  {{ $person.name }}
+                </a>
+              {{ else }}
+                {{ $person.name }}
+              {{ end }}
+            {{ else }}
+              {{ $id }}
+            {{ end }}
+          {{ end }}
+        </dd>
+      </div>
+    {{ end }}
+
+    {{ with .Params.locations }}
+      <div>
+        <dt>Location{{ if gt (len .) 1 }}s{{ end }}</dt>
+        <dd>
+          {{ range $i, $id := . }}
+            {{ if $i }} · {{ end }}
+            {{ $location := index $locationData $id }}
+
+            {{ if $location }}
+              {{ with $location.url }}
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer">
+                  {{ $location.name }}
+                </a>
+              {{ else }}
+                {{ $location.name }}
+              {{ end }}
+            {{ else }}
+              {{ $id }}
+            {{ end }}
+          {{ end }}
+        </dd>
+      </div>
+    {{ end }}
+
+    {{ with .Params.types }}
+      <div>
+        <dt>Type</dt>
+        <dd>
+          {{ range $i, $value := . }}
+            {{ if $i }} · {{ end }}
+            <a href="{{ printf "types/%s/" (urlize $value) | relURL }}">
+              {{ $value }}
+            </a>
+          {{ end }}
+        </dd>
+      </div>
+    {{ end }}
+  </dl>
+</section>
+{{ end }}
